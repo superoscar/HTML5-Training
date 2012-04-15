@@ -1,0 +1,53 @@
+﻿*{margin:0;padding:0;}
+html,body{height:100%;width:100%;}
+canvas{display:block;}
+body{
+	font-family:微软雅黑,Verdana,sans-serif,宋体;
+	background:#042626;
+	color:#7bb51b;
+	font-size:14px;}
+h1 {font-size:30px;}
+p {margin:0 20px;}
+a {color:#fefe00;
+	text-decoration:none;}
+a:hover{text-decoration:underline;}
+a.button{
+	background:#db5200;
+	color:#fff;
+	border-radius:5px;
+	font-size:20px;
+	margin:20px 0 0 45px;
+	display:block;
+	padding:10px;
+	width:100px;
+	text-align:center;}
+a.button:hover{
+	background:#88db00;
+	color:#000;
+	text-decoration:none;}
+#game{
+	height:500px;
+	position:relative;
+	left:50%;
+	top:50%;
+	margin:-250px 0 0 -175px;
+	width:350px;}
+#gameCanvas{
+	background:#001022;}
+#gameUI{
+	height:500px;
+	position:absolute;
+	width:350px;}
+#gameInfo,#gameComplete{
+	background:rgba(0,0,0,0.5);
+	margin-top:20px;
+	padding:20px 0;
+	text-align:center;}
+#gameStats{
+	font-size:14px;
+	margin:10px 0;}
+#gameStats .gameReset{
+	margin:10px 10px 0 0;
+	position:absolute;
+	right:0;
+	top:0;}

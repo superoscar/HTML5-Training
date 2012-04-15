@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>localStorage API</title>
+<style>
+	*{font-size:12px;font-family:微软雅黑 arial}
+</style>
+</head>
+
+<body>
+<label>工号:</label><input type="text" id="inputID" size="10">
+<label>姓名:</label><input type="text" id="inputName" size="15">
+<label>性别:</label><select id="selectSex"><option value="男">男</option><option value="女">女</option></select>
+<label>工资:</label><input type="text" id="inputPay" size="8">
+<input id="btnAdd" type="button" value="增加" onclick="addRecord();">
+<hr>
+<div id="searchBar"></div>
+<table id="listData" style="display:none;">
+</table>
+
+
+<script type="text/javascript">
+function $$(id){
+	return document.getElementById(id);
+}
+
+function addRecord(){
+	var theID = $$("inputID").value;
+	var theName = $$("inputName").value;
+	var theSex = $$("selectSex").value;
+	var thePay = $$("inputPay").value;
+
+	if(theID.length>0){
+		var theData = {};
+		theData.myID = theID;
+		theData.myName = theName;
+		theData.mySex = theSex;
+		theData.myPay = thePay;
+		var jData = JSON.stringify(theData);
+		localStorage.setItem("xxx"+theID,jData);		//加xxx为区分本页面的数据项
+	}
+
+	getLocalData("");
+	$$("inputID").value="";
+	$$("inputName").value="";
+	$$("inputPay").value="";	
+};
+
+function getLocalData(itemKey){
+	var dataNo = localStorage.length;
+	if(dataNo>0){
+		$$("inputID").value="";
+		$$("inputName").value="";
+		$$("inputPay").value="";
+		var searchHtml = "<label>按id查询:</label><input type='text' id='inputSearch' size='10'><input id='bthSearch' type='button' value='查询' onClick='searchRecord();'><hr>";
+		$$("searchBar").innerHTML=searchHtml;
+		$$("listData").style.display ="";
+		var listHtml ="<tr><th>工号</th><th>姓名</th><th>性别</th><th>工资</th><th></th></tr>";
+		if(!itemKey){
+			for(var i=0;i<dataNo;i++){
+				var theKey = localStorage.key(i);
+				if(theKey.substring(0,3)=="xxx"){
+					var theData = JSON.parse(localStorage.getItem(theKey));
+					listHtml += "<tr>";
+					listHtml += "<td>"+ theData.myID + "</td>";
+					listHtml += "<td>"+ theData.myName + "</td>";
+					listHtml += "<td>"+ theData.mySex + "</td>";
+					listHtml += "<td>"+ theData.myPay + "</td>";
+					listHtml += "<td>"+ "<a href='#' onClick=\"editData('"+theData.myID+"');\">编辑</a>";
+					listHtml += " <a href='#' onClick=\"delData('"+theData.myID+"');\">删除</a></td>";
+					listHtml += "</tr>";
+				}
+			}
+		}else{
+			var getData=localStorage.getItem(itemKey);
+			if(getData!=null){
+				var theData=JSON.parse(getData);
+				listHtml += "<tr>";
+				listHtml += "<td>"+ theData.myID + "</td>";
+				listHtml += "<td>"+ theData.myName + "</td>";
+				listHtml += "<td>"+ theData.mySex + "</td>";
+				listHtml += "<td>"+ theData.myPay + "</td>";
+				listHtml += "<td>"+ "<a href='#' onClick=\"editData('"+theData.myID+"');\">编辑</a>";
+				listHtml += " <a href='#' onClick=\"delData('"+theData.myID+"');\">删除</a></td>";
+				listHtml += "</tr>";	
+			}
+		}
+		$$("listData").innerHTML=listHtml;
+	}
+}
+
+function editData(theID){
+	var theData = JSON.parse(localStorage.getItem("xxx"+theID));
+	$$("inputID").value=theData.myID;
+	$$("inputName").value=theData.myName;
+	$$("selectSex").value=theData.mySex;
+	$$("inputPay").value=theData.myPay;
+}
+
+function delData(theID){
+	localStorage.removeItem("xxx"+theID);
+	getLocalData("");
+}
+
+function searchRecord(){
+	getLocalData("xxx"+$$("inputSearch").value);
+}
+
+getLocalData("");
+</script>
+</body>
+</html>

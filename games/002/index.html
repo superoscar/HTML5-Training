@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>撞球球</title>
+		<meta charset="utf-8">
+		<link type="text/css" rel="stylesheet" href="style.css">
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/game.js"></script>
+	</head>
+	<body>
+		<div id="game">
+			<div id="gameUI">
+				<div id="gameInfo">
+					<h1>碰球球</h1>
+					<p><a id="gamePlay" class="button" href="">Play</a></p>
+				</div>
+				<div id="gameStats">
+					<p>球:<span id="gameRemaining"></span></p>
+					<p>得分:<span class="gameScore"></span></p>
+					<p><a class="gameReset" href="">重新开始</a></p>
+				</div>
+				<div id="gameComplete">
+					<h1>搞定！</h1>
+					<p>你用了<span class="gameScore"></span>次撞球.</p>
+					<p><a class="gameReset button" href="">再来一次</a></p>
+				</div>
+			</div>
+			<canvas id="gameCanvas" width="350" height="500">
+					---not support canvas---
+			</canvas>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+	<title>goat</title>
+	
+</head>
+<body>
+<script>
+/*
+var total=0;
+var endyear=10
+var goat=function(age){
+	if(age==2){
+		var newage1=1;
+		total++;
+		new goat(newage1);
+		newage1++;
+		}
+	if(age==4){
+		var newage2=1;
+		total++;
+		new goat(newage2);
+		newage2++;
+		}
+	if(age==5){
+		return 0;
+	}	
+}
+for(var i=1;i<endyear;i++)
+{
+	goat(i);
+	
+}
+console.log(total);
+*/
+/*
+var total=0;
+var goats=[];
+var Goat = function(){
+	this.age=1;
+	this.dead=false;
+	addAge=function(){
+		if(this.age<5)	this.age++ ;
+		else
+		this.dead=true;
+		
+	};
+};
+goats.push(new Goat());
+
+for(var i=0;i++;i<10){
+	console.log(goats[0].age);
+	for(var j=0;j<goats.length;j++){
+		if(!goats[j].dead &&(goats[j].age==2 || goats[j].age==4)){
+			goats.push(new Goat());			
+		};
+		if(goats[j].dead) goats.splice(j);
+		goats[j].addAge();
+	};
+};
+
+var Goat = function(age){
+	this.age=age;
+	this.dead=age<5?false:true;
+}
+var goats=[];
+for(var i=1;i<=5;i++){
+	goats.push(new Goat(i));
+}
+
+function total(years){
+	var t=years+Math.floor(years/3)*1+Math.floor(years/2)*2+Math.floor(years/4)*2-Math.floor(years/5)*1
+	return t;
+}
+*/
+/*
+function check(age){
+	if(age==5) return -1;
+	if(age==2||age==4) return 1;
+	return 0;
+}
+for(var i=1;i<10;i++){
+	var t=0;
+	for(var j=1;j<=5;j++)
+		t+=check(j);
+}
+*/
+
+var Goat=function(age){
+	this.total=0;
+	}
+var goats=[];
+for(var i=1;i<=5;i++) goats.push(new Goat(i));
+	
+goats[1].total=1;
+
+for(var i=1;i<10;i++){
+	for(var j=0;j<5;j++)
+		goats[j+1].total=goats[j];
+	goats[1].total = goats[2]+goats[4];
+}
+var t=0;
+for(var i=0;i<4;i++)
+	t+=goats[i].total;
+</script>
+</body>
+</html>

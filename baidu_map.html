@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+	<title>Baidu Map - Geolocation API</title>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2"></script>
+</head>
+<body>
+	<div id="siteInfo"></div>
+	<div id="mapArea"></div>
+
+<script type="text/javascript">
+		function xx(id){
+			return document.getElementById(id);
+		}
+		var oNav=null;
+		var sHtml="";
+
+		oNav=(oNav==null)?window.navigator:oNav;
+		var oGeoLoc=oNav.geolocation;
+		if(oGeoLoc!=null){
+			oGeoLoc.getCurrentPosition(function(pos){
+				var oSite=pos.coords;
+				var lat = oSite.latitude;	//获得纬度
+				var lng = oSite.longitude;	//获得经度
+				xx("siteInfo").innerHTML = "lattitude:"+lat+",longtitude:"+lng;
+				
+				//百度地图设置
+				var map = new BMap.Map("mapArea"); 
+				var point = new BMap.Point(lng, lat); 
+				map.centerAndZoom(point, 15); 
+				var opts = {  
+							width : 50,     // 信息窗口宽度  
+							height: 50,     // 信息窗口高度  
+							title : "Site Info."  // 信息窗口标题  
+							};
+				var infoWindow = new BMap.InfoWindow("俺在这里！", opts);  // 创建信息窗口对象  
+				map.openInfoWindow(infoWindow, map.getCenter());      // 打开信息窗口
+			},
+			function(onErr){
+				alert(onErr.code + ":" + onErr.message);
+			},
+			{
+				timeout:3000,
+				maximumAge:60*5000
+			});
+		}
+</script>
+</body>
+</html>

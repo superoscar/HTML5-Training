@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+	<title>Google Map - Geolocation API</title>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript">
+		function xx(id){
+			return document.getElementById(id);
+		}
+		
+		var oNav=null;
+		var sHtml="";
+		
+		function init(){
+			oNav=(oNav==null)?window.navigator:oNav;
+			var oGeoLoc=oNav.geolocation;
+			if(oGeoLoc!=null){
+				oGeoLoc.getCurrentPosition(function(pos){
+					var oSite=pos.coords;
+					var lat = oSite.latitude;	//获得纬度
+					var lng = oSite.longitude;	//获得经度
+					
+					//设置google地图参数
+					var oMapDot = new google.maps.LatLng(lat, lng);			
+					var oSet = {
+						zoom:16,
+						center:oMapDot,									//地图的中心点
+						mapTypeId:google.maps.MapTypeId.ROADMAP			//默认的普通二维图块
+					};
+					
+					//创建地图
+					var oMap = new google.maps.Map(xx("mapArea"),oSet);	
+					
+					//创建标记
+					var oMark = new google.maps.Marker({position:oMapDot,map:oMap});
+					
+					//创建信息窗口
+					var oInfo = new google.maps.InfoWindow({content:"俺的位置"});
+					
+					//在地图中打开标记窗口
+					oInfo.open(oMap,oMark);
+				},
+				function(onErr){
+					alert(onErr.code + ":" + onErr.message);
+				},
+				{
+					timeout:3000,
+					maximumAge:60*5000
+				});
+			}
+		}
+	</script>
+	
+</head>
+<body onLoad="init();">
+	<div id="mapArea">this is for map</div>
+</body>
+</html>

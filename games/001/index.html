@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>小游戏</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="style.css" type="text/css">
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/game.js"></script>
+	</head>
+	<body>
+		<div id="game">
+			<div id="gameUI">
+				<div id="gameInfo">
+					<h1>躲来躲去</h1>
+					<p>点击“Play”后按任意键开始</p>
+					<p><a id="gamePlay" class="button" href="">Play</a></p>
+				</div>
+				<div id="gameStats">
+					<p>时间:<span class="gameScore">0</span>秒</p>
+					<p><a class="gameReset button" href="">重新开始</a></p>
+				</div>
+				<div id="gameComplete">
+					<h1>Game Over!</h1>
+					<p>坚持了<span class="gameScore">0</span>秒</p>
+					<p><a class="gameReset button" href="">再来一次</a></p>
+				</div>
+			</div>
+			<canvas id="gameCanvas" width="800" height="500">
+					---not support canvas---
+			</canvas>
+		</div>
+	</body>
+</html>
